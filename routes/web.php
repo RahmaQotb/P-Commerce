@@ -1,11 +1,18 @@
 <?php
-
+//Admin
 use App\Http\Controllers\Admin\AdminForgetPasswordController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use Illuminate\Support\Facades\Route;
 
+// User
+use App\Http\Controllers\Authentication\RegisterController;
+use App\Http\Controllers\Authentication\LoginController;
+use App\Http\Controllers\Authentication\LogoutController;
+use App\Http\Controllers\Authentication\NewPassController;
+use App\Http\Controllers\Authentication\PasswordResetController;
+use App\Http\Controllers\Authentication\ChangePassController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,10 +25,46 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Auth.Admin.login');
+    return view('User.index');
+});
+//User
+
+Route::middleware('guest')->group(function () {
+
+    
+    Route::get('register', [RegisterController::class, 'create'])
+                ->name('register');
+
+    Route::post('register', [RegisterController::class, 'store']);
+
+    Route::get('login', [LoginController::class, 'create'])
+                ->name('login');
+
+    Route::post('login', [LoginController::class, 'store']);
+
+    Route::get('forgot-password', [PasswordResetController::class, 'create'])
+                ->name('password.request');
+
+    Route::post('forgot-password', [PasswordResetController::class, 'store'])
+                ->name('password.email');
+
+    Route::get('/reset-password/{token}', [PasswordResetController::class,"show"])
+                ->name('password.show');
+
+    Route::post('reset-password', [PasswordResetController::class, 'reset'])
+                ->name('password.reset');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('change-password', [ChangePassController::class, 'create'])->name('password.update');
+    Route::put('change-password', [ChangePassController::class, 'update']);
+    
+    Route::post('logout', [LogoutController::class, 'destroy'])
+                ->name('logout');
 });
 
 
+//Admin
 Route::prefix("admin")->middleware("admin")->group(function () {
     Route::get('/register', [AdminRegisterController::class, 'create'])->name('admin.register');
     Route::post('/register', [AdminRegisterController::class, 'store']);
