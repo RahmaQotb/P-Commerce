@@ -1,4 +1,3 @@
-
 @section('body')
     @include('Admin.body')
 @endsection
