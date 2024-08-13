@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AdminForgetPasswordController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,8 +43,6 @@ Route::prefix("admin")->middleware("admin")->group(function () {
     ->name("admin.reset.passwordPost");
 
 
-    
-
 
     
     Route::get("/test" , [AdminProfileController::class , "testview"]);
@@ -64,3 +64,18 @@ Route::prefix("admin")->middleware('auth:admin')->group(function () {
     Route::post('/logout', [AdminLoginController::class, 'destroy'])
                 ->name('admin.logout');
 });
+
+    
+Route::controller(ProductController::class)->prefix("admin")->middleware("auth:admin")->group(function(){
+    Route::get("products","allProducts");
+    Route::get("products/show/{id}","show");
+    Route::get("products/create","create");
+    Route::post("products","store")->name("store");
+    Route::get("products/edit/{id}","edit");
+    Route::put("products/{id}","update");
+    Route::delete("products/{id}","delete");
+
+    // Route::get("/test","testview");
+
+});
+
