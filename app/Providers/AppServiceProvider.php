@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Admin\Product\ProductRepository;
+use App\Repositories\Admin\Product\ProductRepositoryInterface;
+use App\Sevices\Admin\Product\ProductService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        $this->app->bind(ProductService::class, function ($app) {
+            return new ProductService($app->make(ProductRepositoryInterface::class));
+        });
     }
 
     /**

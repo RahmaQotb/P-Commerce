@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Hash;
 class AdminProfileController extends Controller
 {
     
-//     public function testview()
-// {
-//     return view("Admin.profile.change-password");
-// }
+    public function testview()
+{
+    return view("Admin.allProducts");
+}
 
     public function changePassword(){
         return view('Admin.profile.change-password');    
