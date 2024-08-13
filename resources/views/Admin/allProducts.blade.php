@@ -44,4 +44,3 @@
         </div>
     </div>
 @endsection
-https://meet.google.com/qua-nmso-cfr
