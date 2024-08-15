@@ -58,8 +58,15 @@
                 <li>
                   <a href="{{route('password.update')}}"  rel="noopener noreferrer">Change Password</a>
                 </li>
+                
+                <li>
+                  <form action=" {{ route('makeOrder') }} " method="POST">
+                    @csrf
+                      <input type="date" name="req_date" id="">
+                      <button type="submit" >Order</button>
+                  </form>
+                </li>
                 @endauth
-              
                 @guest
                 <li>
                   <a href="{{route("login")}}">
@@ -131,7 +138,7 @@
                     </li>
 
                     <li class="menu-item has-sub">
-                      <a href="#" class="item-anchor d-flex align-item-center" data-effect="Pages">Categories<i class="icon icon-chevron-down"></i></a>
+                      <a href="#" class="item-anchor d-flex align-item-center" data-effect="Pages">Pages<i class="icon icon-chevron-down"></i></a>
                       <ul class="submenu">
                         <li><a href="coming-soon.html" class="item-anchor">Coming soon<span class="text-primary"> (PRO)</span></a></li>
                         <li><a href="login.html" class="item-anchor">Login<span class="text-primary"> (PRO)</span></a></li>

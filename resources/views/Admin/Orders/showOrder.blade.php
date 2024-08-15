@@ -19,8 +19,8 @@
             <table id="table1" class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Product ID</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">Order ID</th>
+                        <th scope="col"></th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    {{--@foreach ($products as $product)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $product->name }}</td>
@@ -37,12 +37,12 @@
                             <td>{{ $product->price }}</td>
                             <td>{{ $product->quantity }}</td>
                             {{-- <td><img src="{{ asset("storage/{$product->image}") }}" width="100px" alt=""></td> --}}
-                            <td> <img src="{{$product->getFirstMediaUrl('images');}}" alt="" srcset="" width="100px"></td>
+                        {{--    <td> <img src="{{$product->getFirstMediaUrl('images');}}" alt="" srcset=""></td>
                             <td>
                                 <a class="btn btn-success" href="{{ url("admin/products/show/$product->id") }}">Show</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach--}}
                 </tbody>
             </table>
         </div>

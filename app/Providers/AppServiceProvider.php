@@ -17,6 +17,14 @@ use App\Services\User\Order\OrderService;
 use App\Repositories\User\Product\UserProductRepository;
 use App\Repositories\User\Product\UserProductRepositoryInterface;
 use App\Services\User\product\UserProductService;
+////////////////////////////////////////////////
+
+
+use App\Repositories\Admin\Order\OrderRepository as AdminOrderRepository;
+use App\Repositories\Admin\Order\OrderRepositoryInterface as AdminOrderRepositoryInterface;
+use App\services\Admin\Order\OrderService as AdminOrderService;
+
+
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -41,6 +49,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserProductRepositoryInterface::class, UserProductRepository::class);
         $this->app->bind(UserProductService::class, function ($app) {
             return new UserProductService($app->make(UserProductRepositoryInterface::class));
+        });
+        $this->app->bind(AdminOrderRepositoryInterface::class, AdminOrderRepository::class);
+        $this->app->bind(AdminOrderService::class, function ($app) {
+            return new AdminOrderService($app->make(AdminOrderRepositoryInterface::class));
         });
     }
     

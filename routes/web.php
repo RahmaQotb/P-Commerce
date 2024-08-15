@@ -4,7 +4,11 @@ use App\Http\Controllers\Admin\AdminForgetPasswordController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\AdminProfileController;
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\CategoryController;
+=======
+use App\Http\Controllers\Admin\OrderController;
+>>>>>>> AbdelrhmanMigrations_Orders
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\UserProductController;
 use App\Http\Middleware\AdminMiddleware;
@@ -17,6 +21,7 @@ use App\Http\Controllers\Authentication\LogoutController;
 use App\Http\Controllers\Authentication\NewPassController;
 use App\Http\Controllers\Authentication\PasswordResetController;
 use App\Http\Controllers\Authentication\ChangePassController;
+use App\Http\Controllers\User\OrderController as UserOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,7 +77,12 @@ Route::middleware('auth')->group(function () {
     Route::put('change-password', [ChangePassController::class, 'update']);
 
     Route::post('logout', [LogoutController::class, 'destroy'])
+<<<<<<< HEAD
         ->name('logout');
+=======
+                ->name('logout');
+
+>>>>>>> AbdelrhmanMigrations_Orders
 });
 
 
@@ -134,6 +144,7 @@ Route::controller(ProductController::class)->prefix("admin")->middleware("auth:a
 
 });
 
+<<<<<<< HEAD
 Route::controller(CategoryController::class)->prefix("admin")->middleware("auth:admin")->group(function () {
     Route::get("categories", "allCategories");
     Route::get("categories/show/{id}", "show");
@@ -143,3 +154,14 @@ Route::controller(CategoryController::class)->prefix("admin")->middleware("auth:
     Route::put("categories/{id}", "Update");
     Route::delete("categories/{id}", "delete");
 });
+=======
+Route::controller(OrderController::class)->middleware("auth:admin")->prefix("admin")->group(function(){
+    Route::get("orders","index");
+    Route::get("orders/{id}","show");
+});
+
+Route::controller(UserOrderController::class)->middleware("auth")->group(function(){
+    Route::post("make_order","makeOrder")->name("makeOrder");
+});
+
+>>>>>>> AbdelrhmanMigrations_Orders
