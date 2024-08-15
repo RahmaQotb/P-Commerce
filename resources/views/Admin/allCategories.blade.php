@@ -10,8 +10,8 @@
 @endsection
 
 @section('body')
-@include("success")
-@include("errors")
+    @include('success')
+    @include('errors')
 
     <div class="card">
         <div class="card-body">
@@ -19,27 +19,21 @@
             <table id="table1" class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Product ID</th>
+                        <th scope="col">Category ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Created_at</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($categories as $category)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $product->name }}</td>
-                            <td>{{ $product->description }}</td>
-                            <td>{{ $product->price }}</td>
-                            <td>{{ $product->quantity }}</td>
-                            {{-- <td><img src="{{ asset("storage/{$product->image}") }}" width="100px" alt=""></td> --}}
-                            <td> <img src="{{$product->getFirstMediaUrl('images');}}" alt="" srcset="" width="100px"></td>
+                            <td>{{ $category->name }}</td>
+                            <td>{{ $category->description}}</td>
+                            <td>{{ $category->created_at }}</td>
                             <td>
-                                <a class="btn btn-success" href="{{ url("admin/products/show/$product->id") }}">Show</a>
+                                <a class="btn btn-success" href="{{ url("admin/categories/show/$category->id") }}">Show</a>
                             </td>
                         </tr>
                     @endforeach

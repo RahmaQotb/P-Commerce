@@ -1,15 +1,14 @@
 <?php
-namespace App\Repositories\Admin\Product;
+namespace App\Repositories\Admin\Category;
 
+interface CategoryRepositoryInterface
+{
 
-Interface ProductRepositoryInterface{
-    
-    public function allProducts();
+    public function allCategories();
     public function create($data);
     public function store($data);
     public function edit($id);
     public function update($data, $id); 
     public function delete($id);
     public function show($id);
-    public function getCategories(); 
 }

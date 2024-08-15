@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\AdminForgetPasswordController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\User\UserProductController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -33,37 +35,48 @@ Route::get('/', function () {
 
 Route::middleware('guest')->group(function () {
 
-    
+
     Route::get('register', [RegisterController::class, 'create'])
-                ->name('register');
+        ->name('register');
 
     Route::post('register', [RegisterController::class, 'store']);
 
     Route::get('login', [LoginController::class, 'create'])
-                ->name('login');
+        ->name('login');
 
     Route::post('login', [LoginController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetController::class, 'create'])
-                ->name('password.request');
+        ->name('password.request');
 
     Route::post('forgot-password', [PasswordResetController::class, 'store'])
-                ->name('password.email');
+        ->name('password.email');
 
-    Route::get('/reset-password/{token}', [PasswordResetController::class,"show"])
-                ->name('password.show');
+    Route::get('/reset-password/{token}', [PasswordResetController::class, "show"])
+        ->name('password.show');
 
     Route::post('reset-password', [PasswordResetController::class, 'reset'])
-                ->name('password.reset');
+        ->name('password.reset');
+
+    Route::get("allProducts", [UserProductController::class, "all"]);
+    Route::get("show/{id}", [UserProductController::class, "show"])->name("product.show");
+
+    
+    // Route::get("category", [UserProductController::class, "category"]);
+    // Route::get("filter/{id}", [UserProductController::class, "filter"]);
+
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('change-password', [ChangePassController::class, 'create'])->name('password.update');
     Route::put('change-password', [ChangePassController::class, 'update']);
-    
+
     Route::post('logout', [LogoutController::class, 'destroy'])
-                ->name('logout');
+        ->name('logout');
 });
+
+
+
 
 
 //Admin
@@ -75,50 +88,58 @@ Route::prefix("admin")->middleware("admin")->group(function () {
     Route::post('/login', [AdminLoginController::class, 'store']);
 
 
-    Route::get("/forget-password" , [AdminForgetPasswordController::class , "forgetpassword"])
-    ->name("admin.forget.password");
-    Route::post("/forget-password" , [AdminForgetPasswordController::class , "forgetpasswordPost"])
-    ->name("admin.forget.passwordPost");;
+    Route::get("/forget-password", [AdminForgetPasswordController::class, "forgetpassword"])
+        ->name("admin.forget.password");
+    Route::post("/forget-password", [AdminForgetPasswordController::class, "forgetpasswordPost"])
+        ->name("admin.forget.passwordPost");;
 
-    Route::get("/reset-password/{token}" , [AdminForgetPasswordController::class , "resetpassword"])
-    ->name("admin.reset.password");
-    Route::post("/reset.password" , [AdminForgetPasswordController::class , "resetpasswordPost"])
-    ->name("admin.reset.passwordPost");
+    Route::get("/reset-password/{token}", [AdminForgetPasswordController::class, "resetpassword"])
+        ->name("admin.reset.password");
+    Route::post("/reset.password", [AdminForgetPasswordController::class, "resetpasswordPost"])
+        ->name("admin.reset.passwordPost");
 
 
 
-    
-    Route::get("/test" , [AdminProfileController::class , "testview"]);
 
+    Route::get("/test", [AdminProfileController::class, "testview"]);
 });
 
 Route::prefix("admin")->middleware('auth:admin')->group(function () {
-    
+
     Route::get("/profile/change-password", [AdminProfileController::class, "changePassword"])
-    ->name("admin.change.password");
+        ->name("admin.change.password");
 
     Route::post("/profile/change-password", [AdminProfileController::class, "updatePassword"])
-    ->name("admin.change.passwordPost");
-    
+        ->name("admin.change.passwordPost");
+
     Route::get('/dashboard', function () {
         return view('Admin.home');
     })->name('Admin.home');
-    
+
     Route::post('/logout', [AdminLoginController::class, 'destroy'])
-                ->name('admin.logout');
+        ->name('admin.logout');
 });
 
-    
-Route::controller(ProductController::class)->prefix("admin")->middleware("auth:admin")->group(function(){
-    Route::get("products","allProducts");
-    Route::get("products/show/{id}","show");
-    Route::get("products/create","create");
-    Route::post("products","store")->name("store");
-    Route::get("products/edit/{id}","edit");
-    Route::put("products/{id}","update");
-    Route::delete("products/{id}","delete");
+
+Route::controller(ProductController::class)->prefix("admin")->middleware("auth:admin")->group(function () {
+    Route::get("products", "allProducts");
+    Route::get("products/show/{id}", "show");
+    Route::get("products/create", "create");
+    Route::post("products", "store")->name("store");
+    Route::get("products/edit/{id}", "edit");
+    Route::put("products/{id}", "update")->name("updateProduct");
+    Route::delete("products/{id}", "delete");
 
     // Route::get("/test","testview");
 
 });
 
+Route::controller(CategoryController::class)->prefix("admin")->middleware("auth:admin")->group(function () {
+    Route::get("categories", "allCategories");
+    Route::get("categories/show/{id}", "show");
+    Route::get("categories/create", "create");
+    Route::post("categories", "Store")->name("Store");
+    Route::get("categories/edit/{id}", "Edit");
+    Route::put("categories/{id}", "Update");
+    Route::delete("categories/{id}", "delete");
+});

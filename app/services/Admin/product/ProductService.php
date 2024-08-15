@@ -1,5 +1,5 @@
 <?php
-namespace App\Sevices\Admin\Product;
+namespace App\services\Admin\product;
 
 use App\Repositories\Admin\Product\ProductRepositoryInterface;
 
@@ -33,4 +33,8 @@ class ProductService{
     public function delete($id){
         return $this->productRepository->delete($id);
     }
+    public function getCategories(){
+        return $this->productRepository->getCategories();
+    }
+
 }
