@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminForgetPasswordController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Authentication\LogoutController;
 use App\Http\Controllers\Authentication\NewPassController;
 use App\Http\Controllers\Authentication\PasswordResetController;
 use App\Http\Controllers\Authentication\ChangePassController;
+use App\Http\Controllers\User\OrderController as UserOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +65,7 @@ Route::middleware('auth')->group(function () {
     
     Route::post('logout', [LogoutController::class, 'destroy'])
                 ->name('logout');
+
 });
 
 
@@ -120,5 +123,14 @@ Route::controller(ProductController::class)->prefix("admin")->middleware("auth:a
 
     // Route::get("/test","testview");
 
+});
+
+Route::controller(OrderController::class)->middleware("auth:admin")->prefix("admin")->group(function(){
+    Route::get("orders","index");
+    Route::get("orders/{id}","show");
+});
+
+Route::controller(UserOrderController::class)->middleware("auth")->group(function(){
+    Route::post("make_order","makeOrder")->name("makeOrder");
 });
 

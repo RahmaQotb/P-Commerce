@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminProductRequest;
-use App\Sevices\Admin\Product\ProductService;
+use App\Services\Admin\Product\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

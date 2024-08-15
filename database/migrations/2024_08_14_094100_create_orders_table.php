@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->timestamp("order_date")->nullable(false);
             $table->date("require_date");
-            $table->integer("quantity");
-            $table->decimal("total_price",8,2);
-            $table->foreignId("user_id")->constrained();
-            $table->foreignId("product_id")->constrained();
-            $table->foreignId("cart_id")->constrained();
+            $table->decimal("total_price",10,2);
+            //$table->foreignId("user_id")->constrained();
+            //$table->foreignId("cart_id")->constrained();
+            $table->unsignedBigInteger("user_id")->nullable();
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("set null");
+
+            $table->unsignedBigInteger("cart_id")->nullable();
+            $table->foreign("cart_id")->references("id")->on("carts")->onDelete("set null");
             $table->timestamps();
         });
     }

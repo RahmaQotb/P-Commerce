@@ -13,7 +13,8 @@ class OrderController extends Controller
     ){}
 
     public function makeOrder(Request $request){
-        $this->orderService->makeOrder($request);
-        return redirect(url(""))->with("success","Your Order has been submitted");
+        $order = $this->orderService->makeOrder($request);
+        dd($order);
+        //return redirect(url(""))->with("Submitted",$order);
     }
 }
