@@ -49,10 +49,15 @@
                                     </div>
                                     @endif
                                     <div class=" d-flex">
+                                    <form action="{{url("addToCart/$product->id")}}" method="post">
+                                        @csrf
+                                        <input type="number" name="quantity" min="1" 
+                                        max="{{$product->quantity}}" id="">
                                         <button type="button" class="btn btn-primary addCartBtn mx-2"
                                             value="{{ $product->id }}">
                                             add to cart <i class="icon icon-arrow-io"></i>
                                         </button>
+                                    </form>
                                         <button type="button" class="wishlist-btn">
                                             <i class="icon icon-heart"></i>
                                         </button>

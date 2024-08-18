@@ -159,7 +159,6 @@ Route::controller(UserOrderController::class)->middleware("auth")->group(functio
 });
 
 Route::controller(CartController::class)->middleware("auth")->group(function(){
-    //Route::get("orders","");
     Route::get("myCart","myCart")->name("myCart");
     Route::post("addToCart/{id}","addToCart")->name("addToCart");
 });

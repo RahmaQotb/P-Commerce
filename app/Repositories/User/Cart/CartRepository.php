@@ -18,12 +18,10 @@ class CartRepository implements CartRepositoryInterface{
 
         $product = Product::find($id)->first();
         $qty = $product->quantity;
-        if($qty <= 0){
-            return $msg = "Product Out of Stock";
-        }
-
+        
 
         $user_id = Auth::user()->id;
+
         $cart = Cart::where("user_id",$user_id)->get();
 
 
