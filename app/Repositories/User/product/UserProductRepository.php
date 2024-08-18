@@ -10,7 +10,9 @@ class UserProductRepository implements UserProductRepositoryInterface
 {
     public function all()
     {
-        return Product::all();
+        $products = Product::all();
+        $categories = Category::all();
+        return [$products,$categories];
     }
     public function show($id)
     {
@@ -18,6 +20,18 @@ class UserProductRepository implements UserProductRepositoryInterface
         $categories = $product->category_id;
         $category = Category::findOrFail($categories);
         return [$category, $product];
+    }
+     public function filter($categoryId)
+    {
+        if(Category::where("id",$categoryId)){
+            $products = Product::where("category_id", $categoryId)->get();
+            $category= Category::where("id",$categoryId)->get();
+            return [$products,$category]; 
+
+        }else {
+            return back()->with("errors" , "This Category Not Found");
+        }
+
     }
 }  
 
@@ -43,10 +57,7 @@ class UserProductRepository implements UserProductRepositoryInterface
 
 
 
-    // public function filter($categoryId)
-    // {
-    //     return Product::where("category_id", $categoryId)->get();
-    // }
+   
     // public function category()
     // {
     //     return Category::all();
