@@ -75,8 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::put('change-password', [ChangePassController::class, 'update']);
 
     Route::post('logout', [LogoutController::class, 'destroy'])
-                ->name('logout');
-
+        ->name('logout');
 });
 
 
@@ -147,20 +146,19 @@ Route::controller(CategoryController::class)->prefix("admin")->middleware("auth:
     Route::put("categories/{id}", "Update");
     Route::delete("categories/{id}", "delete");
 });
-Route::controller(OrderController::class)->middleware("auth:admin")->prefix("admin")->group(function(){
-    Route::get("orders","index");
-    Route::get("orders/{id}","show");
+Route::controller(OrderController::class)->middleware("auth:admin")->prefix("admin")->group(function () {
+    Route::get("orders", "index");
+    Route::get("orders/{id}", "show");
 });
 
-Route::controller(UserOrderController::class)->middleware("auth")->group(function(){
-    Route::get("orders","myOrders");
-    Route::get("orders/{id}","show");
-    Route::post("make_order","makeOrder")->name("makeOrder");
+Route::controller(UserOrderController::class)->middleware("auth")->group(function () {
+    Route::get("orders", "myOrders");
+    Route::get("orders/{id}", "show");
+    Route::post("make_order", "makeOrder")->name("makeOrder");
 });
 
-Route::controller(CartController::class)->middleware("auth")->group(function(){
+Route::controller(CartController::class)->middleware("auth")->group(function () {
     //Route::get("orders","");
-    Route::get("myCart","myCart")->name("myCart");
-    Route::post("addToCart/{id}","addToCart")->name("addToCart");
+    Route::get("myCart", "myCart")->name("myCart");
+    Route::post("addToCart/{id}", "addToCart")->name("addToCart");
 });
-
