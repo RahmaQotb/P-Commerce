@@ -26,4 +26,8 @@ class Product extends Model implements HasMedia
     {
         return $this->hasMany(OrderItem::class);
     }
+    public function cart_item()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

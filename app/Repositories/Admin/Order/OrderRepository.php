@@ -5,9 +5,9 @@ use App\Models\OrderItem;
 
 class OrderRepository implements OrderRepositoryInterface{
     public function index(){
-        return OrderItem::all();
+        return Order::all();
     }
     public function show($id){
-        return OrderItem::find($id);
+        return OrderItem::where("order_id",$id)->get();
     }    
 }

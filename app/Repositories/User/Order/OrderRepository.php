@@ -8,8 +8,21 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class OrderRepository implements OrderRepositoryInterface{
+
+    public function myOrders(){
+        $user_id = Auth::user()->id;
+        return $orders = Order::where("user_id",$user_id)->get();
+        
+    }
+    public function show($id){
+        return OrderItem::where("order_id",$id)->get();
+    }
     public function makeOrder($data){
-        $req_date = $data["req_date"];
+
+        $validate = $data->validate([
+            "req_data"=>"required|date"
+        ]);
+        $req_date = $validate["req_date"];
         $user = Auth::user();
         $cart = Cart::where("user_id",$user["id"])->first();
         $items = CartItem::where("cart_id",$cart->id)->get();
@@ -22,6 +35,7 @@ class OrderRepository implements OrderRepositoryInterface{
         ]);
         $total_price=0;
         foreach($items as $item){
+            $product = $item->product;
             
             OrderItem::create([
                 "quantity"=>$item["quantity"],
@@ -29,9 +43,8 @@ class OrderRepository implements OrderRepositoryInterface{
                 "product_id"=>$item["product_id"],
                 "order_id"=> $order["id"]
             ]);
-            $total_price = $total_price + ($item["price"]*$item["quantity"]);
+            $total_price = $total_price + ($product->price*$item["quantity"]);
 
-            $product = Product::find($item["product_id"]);
 
             $product->update([
                 "quantity"=>$product["quantity"] - $item["quantity"] 

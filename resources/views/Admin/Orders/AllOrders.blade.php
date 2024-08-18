@@ -20,22 +20,21 @@
                 <thead>
                     <tr>
                         <th scope="col">Order ID</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Created At</th>
+                        <th scope="col">Require Date</th>
                         <th scope="col">Total Price</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($orders as $order)
                     <tr>
-                            <td>{{ $order->order_id }}</td>
-                            <td>{{ $order->product->name }}</td>
-                            <td>{{ $order->price }}</td>
-                            <td>{{ $order->quantity }}</td>
-                            <td>{{ $order->created_at }}</td>
-                            <td>{{ $order->order->total_price }}</td>
+                            <td>{{ $order->id }}</td>
+                            <td>{{ $order->require_date }}</td>
+                            <td>{{ $order->total_price }}</td>
+                            <td>{{ $order->user->name }}</td>
+                            <td>                                <a class="btn btn-success" href="{{ url("admin/orders/$order->id") }}">Show</a>
+                            </td>
                             {{-- <td><img src="{{ asset("storage/{$order->image}") }}" width="100px" alt=""></td> --}}
                             {{--<td> <img src="{{$order->getFirstMediaUrl('images');}}" alt="" srcset=""></td>
                             <td>

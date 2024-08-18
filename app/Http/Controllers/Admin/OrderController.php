@@ -16,7 +16,7 @@ class OrderController extends Controller
         return view("Admin.Orders.AllOrders",compact("orders"));
     }
     public function show($id){
-        $order = $this->orderService->show($id);
-        return view("Admin.Orders.showOrder",compact("order"));
+        $orders = $this->orderService->show($id);
+        return view("Admin.Orders.showOrder",compact("orders"));
     }
 }

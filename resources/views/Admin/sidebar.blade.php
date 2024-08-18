@@ -76,6 +76,22 @@
                 </li>
                 </li>
 
+                <li class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-person-badge-fill"></i>
+                    <span>Orders</span>
+                </a>
+                
+                <ul class="submenu ">
+                    
+                    <li class="submenu-item">
+                        <a href="{{url("admin/orders")}}" class="submenu-link">All Orders</a>
+                        
+                    </li>
+                    
+                
+                </ul>
+            </li>
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
@@ -159,127 +175,8 @@
             </ul>
         </div>
     </div>
-<<<<<<< HEAD
-=======
     <div class="sidebar-toggler  x">
         <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
     </div>
 </div>
 </div>
-<div class="sidebar-menu">
-<ul class="menu">
-    <li class="sidebar-title">Menu</li>
-    
-    <li
-        class="sidebar-item active ">
-        <a href="{{url ("admin/dashboard")}}" class='sidebar-link'>
-            <i class="bi bi-grid-fill"></i>
-            <span>Dashboard</span>
-        </a>
-    </li>
-    
-    <li
-        class="sidebar-item  has-sub">
-        <a href="#" class='sidebar-link'>
-            <i class="bi bi-grid-1x2-fill"></i>
-            <span>Profile</span>
-        </a>
-        
-        <ul class="submenu ">
-            
-            <li class="submenu-item  ">
-                <form method="POST" action="{{route('admin.change.password')}}">
-                    @csrf
-                <a href="{{url ("admin/profile/change-password") }}" class="submenu-link" style="background: none; border: none; padding: 1; cursor: pointer;" type="Submit" >
-                    {{-- <i class="bi bi-grid-fill"></i> --}}
-                    <span>Change Password</span>
-                </a>
-                </form>                
-            </li>
-            
-        </ul>
-        
-
-    </li>
-    </li>
-
-    <li class="sidebar-item  has-sub">
-        <a href="#" class='sidebar-link'>
-            <i class="bi bi-person-badge-fill"></i>
-            <span>Orders</span>
-        </a>
-        
-        <ul class="submenu ">
-            
-            <li class="submenu-item">
-                <a href="{{url("admin/orders")}}" class="submenu-link">All Orders</a>
-                
-            </li>
-            
-        
-        </ul>
-    </li>
-   
-    <li class="sidebar-item  has-sub">
-    <a href="#" class='sidebar-link'>
-        <i class="bi bi-person-badge-fill"></i>
-        <span>Products</span>
-    </a>
-    
-    <ul class="submenu ">
-        
-        <li class="submenu-item  ">
-            <a href="{{url("admin/products")}}" class="submenu-link">All Products</a>
-            
-        </li>
-        
-        <li class="submenu-item  ">
-            <a href="auth-register.html" class="submenu-link">Add Product</a>
-            
-        </li>
-    </ul>
-</li>
-    
-    <li
-        class="sidebar-item  has-sub">
-        <a href="#" class='sidebar-link'>
-            <i class="bi bi-person-badge-fill"></i>
-            <span>Authentication</span>
-        </a>
-        
-        <ul class="submenu ">
-            
-            <li class="submenu-item  ">
-                <a href="auth-login.html" class="submenu-link">Login</a>
-                
-            </li>
-            
-            <li class="submenu-item  ">
-                <a href="auth-register.html" class="submenu-link">Register</a>
-                
-            </li>
-            
-            <li class="submenu-item  ">
-                <a href="auth-forgot-password.html" class="submenu-link">Forgot Password</a>
-                
-            </li>
-            
-        </ul>
-        
-
-    </li>
-   
-    <li class="sidebar-link">
-        <form method="POST" action="{{ route('admin.logout') }}">
-            @csrf
-            <button type="submit" class="sidebar-link" style="background: none; border: none; padding: 0; color: inherit; cursor: pointer;">
-                <i class="bi bi-grid-fill"></i>
-                <span>Logout</span>
-            </button>
-        </form>                
-    </li>
-    
-</ul>
-</div>
-</div>
->>>>>>> AbdelrhmanMigrations_Orders

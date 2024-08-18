@@ -55,11 +55,7 @@
       <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
         <h2 class="section-title">Featured Products</h2>            
         <div class="btn-wrap">
-<<<<<<< HEAD
           <a href="allProducts" class="d-flex align-items-center">View all products <i class="icon icon icon-arrow-io"></i></a>
-=======
-          <a href="shop.html" class="d-flex align-items-center">View all products <i class="icon icon icon-arrow-io"></i></a>
->>>>>>> AbdelrhmanMigrations_Orders
         </div>            
       </div>
       <div class="swiper product-swiper overflow-hidden">

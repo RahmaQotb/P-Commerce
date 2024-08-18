@@ -77,7 +77,7 @@
                 
                 
                 <li>
-                  <a href="cart.html">
+                  <a href="{{route("myCart")}}">
                     <i class="icon icon-shopping-cart"></i>
                   </a>
                 </li>
@@ -87,6 +87,15 @@
                     <i class="icon icon-heart"></i>
                   </a>
                 </li>
+                @auth
+                    
+                <li>
+                  <a href="{{url("orders")}}">
+                    <i class="bi bi-box"></i>
+                  </a>
+                </li>
+                @endauth
+
                 <li class="user-items search-item pe-3">
                   <a href="#" class="search-button">
                     <i class="icon icon-search"></i>
@@ -102,7 +111,7 @@
           <div class="row d-flex align-items-center">
             <div class="col-lg-2 col-md-2">
               <div class="main-logo">
-                <a href="index.html">
+                <a href="{{url("")}}">
                   <img src="{{asset("User")}}/images/main-logo.png" alt="logo">
                 </a>
               </div>

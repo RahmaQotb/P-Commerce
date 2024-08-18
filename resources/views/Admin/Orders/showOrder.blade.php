@@ -12,39 +12,24 @@
 @section('body')
 @include("success")
 @include("errors")
-
-    <div class="card">
-        <div class="card-body">
-
-            <table id="table1" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Order ID</th>
-                        <th scope="col"></th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{--@foreach ($products as $product)
-                        <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $product->name }}</td>
-                            <td>{{ $product->description }}</td>
-                            <td>{{ $product->price }}</td>
-                            <td>{{ $product->quantity }}</td>
-                            {{-- <td><img src="{{ asset("storage/{$product->image}") }}" width="100px" alt=""></td> --}}
-                        {{--    <td> <img src="{{$product->getFirstMediaUrl('images');}}" alt="" srcset=""></td>
-                            <td>
-                                <a class="btn btn-success" href="{{ url("admin/products/show/$product->id") }}">Show</a>
-                            </td>
-                        </tr>
-                    @endforeach--}}
-                </tbody>
-            </table>
+    @foreach ($orders as $order)
+        
+    
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title">{{$loop->iteration}}</h5>
+            <h5 class="card-title">Product Name : {{$order->product->name}}</h5>
+            <p class="card-text">Category : {{$order->product->category->name}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">Product Price : {{$order->price}}</li>
+            <li class="list-group-item">Ordered Quantity : {{$order->quantity}}</li>
+            <li class="list-group-item">Total Price of the Product : {{$order->price * $order->quantity}}</li>
+            <li class="list-group-item"><a class="btn btn-success" href="{{ url("admin/products/show/$order->product_id") }}">Show</a></li>
+        </ul>
+            
         </div>
-    </div>
+        @endforeach
+
+        
 @endsection

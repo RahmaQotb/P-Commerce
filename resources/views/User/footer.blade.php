@@ -116,8 +116,5 @@
       </div>
     </div>
   </div>
-
-  <script src="{{asset("User")}}/js/jquery-1.11.0.min.js"></script>
-  <script src="{{asset("User")}}/js/plugins.js"></script>
-  <script src="{{asset("User")}}/js/script.js"></script>
+  
 </body>

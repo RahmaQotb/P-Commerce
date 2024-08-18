@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\UserProductController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -59,15 +60,15 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [PasswordResetController::class, 'reset'])
         ->name('password.reset');
-
-    Route::get("allProducts", [UserProductController::class, "all"]);
-    Route::get("show/{id}", [UserProductController::class, "show"])->name("product.show");
-
+        
+        
+        // Route::get("category", [UserProductController::class, "category"]);
+        // Route::get("filter/{id}", [UserProductController::class, "filter"]);
+        
+    });
     
-    // Route::get("category", [UserProductController::class, "category"]);
-    // Route::get("filter/{id}", [UserProductController::class, "filter"]);
-
-});
+        Route::get("allProducts", [UserProductController::class, "all"]);
+        Route::get("show/{id}", [UserProductController::class, "show"])->name("product.show");
 
 Route::middleware('auth')->group(function () {
     Route::get('change-password', [ChangePassController::class, 'create'])->name('password.update');
@@ -152,6 +153,14 @@ Route::controller(OrderController::class)->middleware("auth:admin")->prefix("adm
 });
 
 Route::controller(UserOrderController::class)->middleware("auth")->group(function(){
+    Route::get("orders","myOrders");
+    Route::get("orders/{id}","show");
     Route::post("make_order","makeOrder")->name("makeOrder");
+});
+
+Route::controller(CartController::class)->middleware("auth")->group(function(){
+    //Route::get("orders","");
+    Route::get("myCart","myCart")->name("myCart");
+    Route::post("addToCart/{id}","addToCart")->name("addToCart");
 });
 
