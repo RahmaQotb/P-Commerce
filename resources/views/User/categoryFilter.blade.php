@@ -1,7 +1,6 @@
 @extends('User.layout')
 @section('body')
-@include('errors')
-@include('success')
+
     <section id="featured-products" class="product-store padding-large">
         <div class="container">
             <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
@@ -11,10 +10,10 @@
                 {{-- </div>             --}}
             </div>
                 <div class="swiper product-swiper overflow-hidden">
-                    @foreach ($categories as $category)
+                    @foreach ($category as $cat)
                     <ul class="nav justify-content-end">
                         <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="{{ route('categoryFilter', $category->id) }}">{{$category->name}}</a>
+                          <a class="nav-link active" aria-current="page" href="#">{{$cat->name}}</a>
                       </ul>
                       @endforeach
                       
@@ -28,35 +27,17 @@
                                     <img src="{{ $product->getFirstMediaUrl('images') }}" alt="Books"
                                         class="product-image">
                                 </div>
-                                <div class="card-body">
-                                    <div class="product-detail">
-                                        <h3 class="product-title">
-                                            <a href="{{ route('product.show', $product->id) }}">{{ $product->name }}</a>
-                                        </h3>
-                                        <span class="item-price text-primary">${{ $product->price }}</span>
-                                    </div>
-                                    @if ($product->quantity <= 5)
-                                        
-                                    <div>
-                                        <span class="item-price text-primary">Only {{ $product->quantity }} remain in the stock</span>
-
-                                    </div>
-                                    
-                                    @else <div>
-                                        <span class="item-price text-primary"></span>
-
-                                    </div>
-                                    @endif
-                                    <div class=" d-flex">
-                                    <form action="{{url("addToCart/$product->id")}}" method="post">
-                                        @csrf
-                                        <input type="number" name="quantity" min="1" 
-                                        max="{{$product->quantity}}" id="">
-                                        <button type="button" class="btn btn-primary addCartBtn mx-2"
-                                            value="{{ $product->id }}">
-                                            add to cart <i class="icon icon-arrow-io"></i>
+                                <div class="cart-concern">
+                                    <div class="cart-button d-flex justify-content-between align-items-center">
+                                        <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to
+                                            cart <i class="icon icon-arrow-io"></i>
                                         </button>
-                                    </form>
+                                        <a href="{{ route('product.show', $product->id) }}">
+                                        <button type="button" class="view-btn tooltipd-flex">
+                                            <i class="icon icon-screen-full"></i>
+                                            <span class="tooltip-text">Quick view</span>
+                                        </button>
+                                        </a>
                                         <button type="button" class="wishlist-btn">
                                             <i class="icon icon-heart"></i>
                                         </button>

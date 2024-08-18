@@ -18,6 +18,10 @@ class UserProductService
     {
         return $this->userProductRepositoryInterface->show($id);
     }
+        public function filter($categoryId)
+    {
+        return $this->userProductRepositoryInterface->filter($categoryId);
+    }
 }
 
 
@@ -32,7 +36,3 @@ class UserProductService
 //         return $this->userProductRepositoryInterface->category();
 //     }
 
-//     public function filter($categoryId)
-//     {
-//         return $this->userProductRepositoryInterface->filter($categoryId);
-//     }
