@@ -63,7 +63,7 @@ Route::middleware('guest')->group(function () {
 
     
     // Route::get("category", [UserProductController::class, "category"]);
-    // Route::get("filter/{id}", [UserProductController::class, "filter"]);
+    Route::get("filter/{id}", [UserProductController::class, "filter"])->name("categoryFilter");
 
 });
 

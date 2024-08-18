@@ -1,7 +1,6 @@
 @extends('User.layout')
 @section('body')
-@include('errors')
-@include('success')
+
     <section id="featured-products" class="product-store padding-large">
         <div class="container">
             <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
@@ -11,10 +10,10 @@
                 {{-- </div>             --}}
             </div>
                 <div class="swiper product-swiper overflow-hidden">
-                    @foreach ($categories as $category)
+                    @foreach ($category as $cat)
                     <ul class="nav justify-content-end">
                         <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="{{ route('categoryFilter', $category->id) }}">{{$category->name}}</a>
+                          <a class="nav-link active" aria-current="page" href="#">{{$cat->name}}</a>
                       </ul>
                       @endforeach
                       
