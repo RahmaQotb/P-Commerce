@@ -76,6 +76,22 @@
                 </li>
                 </li>
 
+                <li class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-person-badge-fill"></i>
+                    <span>Orders</span>
+                </a>
+                
+                <ul class="submenu ">
+                    
+                    <li class="submenu-item">
+                        <a href="{{url("admin/orders")}}" class="submenu-link">All Orders</a>
+                        
+                    </li>
+                    
+                
+                </ul>
+            </li>
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
@@ -159,3 +175,8 @@
             </ul>
         </div>
     </div>
+    <div class="sidebar-toggler  x">
+        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+    </div>
+</div>
+</div>
