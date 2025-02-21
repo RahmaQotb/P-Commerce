@@ -36,4 +36,11 @@ class categoryService{
     public function delete($id){
         return $this->categoryRepository->delete($id);
     }
+    public function trash(){
+        return $this->categoryRepository->trash();
+      }
+      public function restore($id){
+        return $this->categoryRepository->restore($id);      }
+      public function forceDelete($id){
+        return $this->categoryRepository->forceDelete($id);      }
 }

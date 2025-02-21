@@ -31,5 +31,15 @@ class CategoryRepository implements CategoryRepositoryInterface{
         $category = Category::findOrFail($id);
         $category->delete();
     }
-   
+    public function trash(){
+      return Category::onlyTrashed()->get();
+    }
+    public function restore($id){
+        $cateogry = Category::onlyTrashed()->findOrFail($id);
+        return $cateogry->restore();
+    }
+    public function forceDelete($id){
+        $cateogry = Category::onlyTrashed()->findOrFail($id);
+        return $cateogry->forceDelete();
+    }
 }

@@ -45,4 +45,17 @@ class CategoryController extends Controller
         return view("Admin.showCategory" , compact("category"));
 
     }
+    public function trash(){
+        $categories= $this->categoryService->trash();
+        return view('Admin.TrashCategories' , compact('categories'));
+    }
+      public function restore($id){
+         $this->categoryService->restore($id);
+         return redirect()->route("trash.category")->with("success" , "Category Restored Successfully");
+    }
+      public function forceDelete($id){
+       $this->categoryService->forceDelete($id);
+        return redirect()->route("trash.category")->with("success" , "Category Deleted Permanently Successfully");
+
+     }
 }

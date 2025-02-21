@@ -145,6 +145,10 @@ Route::controller(CategoryController::class)->prefix("admin")->middleware("auth:
     Route::get("categories/edit/{id}", "Edit");
     Route::put("categories/{id}", "Update");
     Route::delete("categories/{id}", "delete");
+    Route::get("categories/trash" , "trash")->name("trash.category");
+    Route::put("category/restore/{id}","restore")->name("restore");
+    Route::delete("category/forceDelete/{id}","forceDelete")->name("forceDelete");
+
 });
 Route::controller(OrderController::class)->middleware("auth:admin")->prefix("admin")->group(function () {
     Route::get("orders", "index");

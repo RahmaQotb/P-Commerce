@@ -130,6 +130,10 @@
                             <a href="{{url('admin/categories/create')}}" class="submenu-link">Add Category</a>
 
                         </li>
+                        <li class="submenu-item">
+                            <a href="{{url('admin/categories/trash')}}" class="submenu-link">Trashed Categories</a>
+
+                        </li>
                     </ul>
                 </li>
 
