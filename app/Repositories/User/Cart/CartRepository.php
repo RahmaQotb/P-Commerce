@@ -16,21 +16,19 @@ class CartRepository implements CartRepositoryInterface{
 
     public function addToCart($data, $id){
 
-        $product = Product::find($id)->first();
+        $product = Product::findOrFail($id);
         $qty = $product->quantity;
-        if($qty <= 0){
-            return $msg = "Product Out of Stock";
-        }
+        
+        $user_id = auth()->user()->id;
 
-
-        $user_id = Auth::user()->id;
-        $cart = Cart::where("user_id",$user_id)->get();
-
+        $cart = Cart::where("user_id",$user_id)->first();
 
         if(!$cart && (($qty - $data->quantity) >=0) ){
+
             $cart = Cart::create([
                 "user_id" =>$user_id
             ]);
+
             CartItem::create([
                 "quantity" => $data->quantity,
                 "product_id"=>$product["id"],
@@ -40,12 +38,11 @@ class CartRepository implements CartRepositoryInterface{
         $product->update([
             "quantity"=> $qty - $data->quantity 
         ]);
-        return $msg = "Your Product Added to Cart Successfully";
+        // return $msg = "Your Product Added to Cart Successfully";
         }
 
-
         elseif($cart && (($qty - $data->quantity) >=0)){
-            $cart_items = CartItem::where("cart_id",$cart["id"])->where("product_id",$product["id"])->get();
+            $cart_items = CartItem::where("cart_id",$cart["id"])->where("product_id",$product["id"])->first();
             if($cart_items){
                 $cart_items->update([
                     "quantity" => $cart_items + $data->quantity 
@@ -53,7 +50,7 @@ class CartRepository implements CartRepositoryInterface{
                 $product->update([
                     "quantity"=> $qty - $data->quantity 
                 ]);
-                return $msg = "Product Added To Your Cart";
+                return  "Product Added To Your Cart";
             
             
             }else{
@@ -66,11 +63,11 @@ class CartRepository implements CartRepositoryInterface{
                 $product->update([
                     "quantity"=> $qty - $data->quantity 
                 ]);
-                return $msg = "Product Added To Your Cart";
+                return $msg ="Product Added To Your Cart";
             }
         }
         else{
-            return $msg = "Enter a valid quantity number";
+            return $msg ="Enter a valid quantity number";
         }
 
 

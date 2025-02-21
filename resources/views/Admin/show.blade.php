@@ -15,7 +15,8 @@
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
     <h1>
-        <a class="btn btn-success" href="{{url("admin/products/edit/$product->id")}}" >Edit</a>      </div>
+        <a class="btn btn-success" href="{{url("admin/products/edit/$product->id")}}" >Edit</a> 
+           </div>
   </div>
 
 

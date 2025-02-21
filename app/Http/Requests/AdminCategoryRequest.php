@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AdminCategoryRequest extends FormRequest
 {
@@ -22,8 +23,8 @@ class AdminCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-         'name'=>'required|string|max:255',
-         'description'=>'required|string'
+            "name" => 'required|string|max:255',Rule::unique("categories" , "name"),
+            "description" => 'required|string'
         ];
     }
 }

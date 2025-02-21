@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Filter;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AdminProductRequest extends FormRequest
 {
@@ -21,13 +23,21 @@ class AdminProductRequest extends FormRequest
      */
     public function rules(): array
     {
+       
         return [
-            "name"=>"required|string|max:255|unique:products,name",
-            "description"=>"required|string",
-            "image"=>"required|image|mimes:png,jpg,jpeg",
-            "price"=>"required|numeric",
-            "quantity"=>"required|integer",
-            "category_id"=>"required|exists:categories,id"
+            "name" => ['required','string','max:255' ,new Filter(['laravel' , 'php']),Rule::unique("products" , "name")] ,
+            "description" => "required|string",
+            "image" => "image|nullable|mimes:png,jpg,jpeg" ,
+            "price" =>"required|numeric",
+            "quantity" => "required|integer",
+            "category_id" => "required|exists:categories,id"
+        ];
+    }
+    public function messages(){
+        return [
+            "required" => "The :attribute is required" ,
+            "unique" => "The :attribute is already exists",
+            "integer" => "The :attribute must be an integer"
         ];
     }
 }

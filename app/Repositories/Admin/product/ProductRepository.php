@@ -26,7 +26,8 @@ class ProductRepository implements ProductRepositoryInterface
     public function store($data)
     {
         $product = Product::create($data);
-        $product->addMedia($data['image'])->toMediaCollection('images');
+        if(isset($data['image'])){
+        $product->addMedia($data['image'])->toMediaCollection('images');}
         return $product;
     }
     public function show($id)

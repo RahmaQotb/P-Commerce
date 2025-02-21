@@ -25,9 +25,10 @@ use App\Services\User\product\UserProductService;
 
 use App\Repositories\Admin\Order\OrderRepository as AdminOrderRepository;
 use App\Repositories\Admin\Order\OrderRepositoryInterface as AdminOrderRepositoryInterface;
+use App\Repositories\Api\Auth\User\UserAuthRepository;
+use App\Repositories\Api\Auth\User\UserAuthRepositoryInterface;
 use App\services\Admin\Order\OrderService as AdminOrderService;
-
-
+use App\Services\Api\Auth\User\UserAuthService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -60,6 +61,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
         $this->app->bind(CartService::class, function ($app) {
             return new CartService($app->make(CartRepositoryInterface::class));
+        });
+
+        $this->app->bind(UserAuthRepositoryInterface::class, UserAuthRepository::class);
+        $this->app->bind(UserAuthService::class, function ($app) {
+            return new UserAuthService($app->make(UserAuthRepositoryInterface::class));
         });
     }
     
