@@ -150,6 +150,10 @@ Route::controller(CategoryController::class)->prefix("admin")->middleware("auth:
     Route::delete("category/forceDelete/{id}","forceDelete")->name("forceDelete");
 
 });
+Route::controller(CartController::class)->middleware("auth")->group(function(){
+    Route::get("myCart","myCart")->name("myCart");
+    Route::post("addToCart/{id}","addToCart")->name("addToCart");
+});
 Route::controller(OrderController::class)->middleware("auth:admin")->prefix("admin")->group(function () {
     Route::get("orders", "index");
     Route::get("orders/{id}", "show");
@@ -161,7 +165,4 @@ Route::controller(UserOrderController::class)->middleware("auth")->group(functio
     Route::post("make_order","makeOrder")->name("makeOrder"); 
 });
 
-Route::controller(CartController::class)->middleware("auth")->group(function(){
-    Route::get("myCart","myCart")->name("myCart");
-    Route::post("addToCart/{id}","addToCart")->name("addToCart");
-});
+

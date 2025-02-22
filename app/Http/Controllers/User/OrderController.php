@@ -22,7 +22,7 @@ class OrderController extends Controller
     }
     public function makeOrder(Request $request){
         $order = $this->orderService->makeOrder($request);
-        dd($order);
-        //return redirect(url(""))->with("Submitted",$order);
+        // dd($order);
+        return redirect(url(""))->with("Submitted",$order);
     }
 }

@@ -20,7 +20,7 @@ class OrderRepository implements OrderRepositoryInterface{
     public function makeOrder($data){
 
         $validate = $data->validate([
-            "req_data"=>"required|date"
+            "req_date"=>"required|date"
         ]);
         $req_date = $validate["req_date"];
         $user = Auth::user();
@@ -46,21 +46,18 @@ class OrderRepository implements OrderRepositoryInterface{
             $total_price = $total_price + ($product->price*$item["quantity"]);
 
 
-            $product->update([
-                "quantity"=>$product["quantity"] - $item["quantity"] 
-            ]);
+            // $product->update([
+            //     "quantity"=>$product["quantity"] - $item["quantity"] 
+            // ]);
 
         }
         $order->update([
             "total_price"=> $total_price
         ]);
 
-        $cart->delete();
+     event('order_created');
         
         return $order;
-        
-        
-        
 
     }
 }

@@ -17,8 +17,8 @@ class CartController extends Controller
 
     public function myCart()
     {
-        $carts = $this->cartService->myCart();
-        return view("User.Cart.myCart",compact("carts"));
+        $cart= $this->cartService->myCart();
+        return view("User.Cart.myCart",compact("cart"));
     }
 
     public function addToCart(Request $request , $id)
